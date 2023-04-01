@@ -19,15 +19,15 @@ print(prewittX)
 print(prewittY)
 
 # Mask Sobel
-sobelX = np.array([[-1, 0, 1],
+sobelH = np.array([[-1, 0, 1],
                    [-2, 0, 2],
                    [-1, 0, 1]])
-sobelY = np.array([[1, 2, 1],
+sobelV = np.array([[1, 2, 1],
                    [0, 0, 0],
                    [-1, -2, -1]])
 
-print(sobelX)
-print(sobelY)
+print(sobelH)
+print(sobelV)
 
 # 5x5 LoG filter
 LoGfilter55 = np.array([[0, 0, -1, 0, 0],
