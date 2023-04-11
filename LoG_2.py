@@ -1,6 +1,7 @@
 import cv2
 import numpy as np
 from Convolution import convolution
+from convolve2D import convolve2D
 import Mask
 import matplotlib.pyplot as plt
 
@@ -45,13 +46,27 @@ def Zero_crossing(image):
         
 if __name__ == "__main__":
     # Load the image in greyscale
-    img = cv2.imread('.//img_test//lena.png')
+    img = cv2.imread('.//img_test//city.png')
+    img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+    
+    # img_blur = cv2.filter2D(src=img, ddepth=-1, kernel=Mask.LaplacianMask)
+    
+    # Edge Detection Kernel
+    kernel = np.array([[-1, -1, -1], [-1, 8, -1], [-1, -1, -1]])
 
-    img_blur = convolution(img, Mask.LaplacianMask, True, True)
+    #img_blur = convolution(img, kernel=kernel, average=True, verbose=True)
+    img_blur = convolve2D(img, kernel, padding=2)
+    cv2.imwrite('2DConvolved.jpg', img_blur)
+    
+    cv2.imshow("res image", img_blur)
+    
+    plt.imshow(img_blur, cmap='gray')
+    plt.title("convolution Image")
+    plt.show()
     
     img_log = Zero_crossing(img_blur)
     
     plt.imshow(img_log, cmap='gray')
-    plt.title("Log Image")
+    plt.title("LoG Image")
     plt.show()
     
